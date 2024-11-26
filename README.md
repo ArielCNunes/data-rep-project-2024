@@ -9,7 +9,7 @@ This is a simple Task Manager web application built with the MERN stack (MongoDB
 3. Development Tools: Nodemon (for backend development) and Postman (for API testing)
 
 ## Set Up Instructions
-1.	Clone the Repository: git clone [<repository-url>](https://github.com/ArielCNunes/data-rep-project-2024.git)
+1.	Clone the Repository: git clone https://github.com/ArielCNunes/data-rep-project-2024.git
 2.	Navigate into project folder and then into Backend folder
 3.	Install dependecies: npm install
 4.	Start the backend server on port 4000: npx nodemon server.js
