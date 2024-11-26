@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TaskForm from './TaskForm';
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        // Fetch tasks from the backend
+    const fetchTasks = () => {
         axios.get('http://localhost:4000/tasks')
             .then((response) => {
                 setTasks(response.data);
@@ -13,11 +13,16 @@ const TaskList = () => {
             .catch((error) => {
                 console.error('Error fetching tasks:', error);
             });
+    };
+
+    useEffect(() => {
+        fetchTasks();
     }, []);
 
     return (
         <div>
             <h2>Task List</h2>
+            <TaskForm fetchTasks={fetchTasks} />
             <ul>
                 {tasks.map((task) => (
                     <li key={task._id}>
