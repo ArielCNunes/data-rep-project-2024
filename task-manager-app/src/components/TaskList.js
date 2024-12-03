@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TaskItem from './TaskItem';
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -31,14 +32,12 @@ const TaskList = () => {
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task) => (
-                    <li key={task._id}>
-                        <strong>{task.title}</strong>: {task.description}
-                        {task.completed ? ' (Completed)' : ' (Pending)'}
-                        <button onClick={() => toggleCompletion(task._id, task.completed)}>
-                            {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
-                        </button>
-                        <button onClick={() => deleteTask(task._id)}>Delete</button>
-                    </li>
+                    <TaskItem
+                        key={task._id}
+                        task={task}
+                        toggleCompletion={toggleCompletion}
+                        deleteTask={deleteTask}
+                    />
                 ))}
             </ul>
         </div>
