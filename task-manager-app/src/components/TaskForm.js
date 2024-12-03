@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const TaskForm = ({ fetchTasks }) => {
+const TaskForm = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Create a new task
         axios.post('http://localhost:4000/tasks', { title, description, completed: false })
             .then(() => {
-                fetchTasks(); // Refresh the task list
-                setTitle(''); // Clear the form
+                setTitle('');
                 setDescription('');
+                alert('Task added successfully!');
             })
-            .catch((error) => {
-                console.error('Error creating task:', error);
-            });
+            .catch((error) => console.error('Error creating task:', error));
     };
 
     return (

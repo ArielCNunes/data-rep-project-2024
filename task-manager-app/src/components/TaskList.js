@@ -1,44 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TaskForm from './TaskForm';
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
 
-    // Fetch tasks from the backend
     const fetchTasks = () => {
         axios.get('http://localhost:4000/tasks')
-            .then((response) => {
-                setTasks(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching tasks:', error);
-            });
+            .then((response) => setTasks(response.data))
+            .catch((error) => console.error('Error fetching tasks:', error));
     };
 
-    // Toggle task completion
     const toggleCompletion = (taskId, completed) => {
         axios.put(`http://localhost:4000/tasks/${taskId}`, { completed: !completed })
-            .then(() => {
-                fetchTasks(); // Refresh the task list after updating
-            })
-            .catch((error) => {
-                console.error('Error updating task:', error);
-            });
+            .then(fetchTasks)
+            .catch((error) => console.error('Error updating task:', error));
     };
 
-    // Delete a task
     const deleteTask = (taskId) => {
         axios.delete(`http://localhost:4000/tasks/${taskId}`)
-            .then(() => {
-                fetchTasks(); // Refresh the task list after deleting
-            })
-            .catch((error) => {
-                console.error('Error deleting task:', error);
-            });
+            .then(fetchTasks)
+            .catch((error) => console.error('Error deleting task:', error));
     };
 
-    // Fetch tasks on component load
     useEffect(() => {
         fetchTasks();
     }, []);
@@ -58,7 +41,6 @@ const TaskList = () => {
                     </li>
                 ))}
             </ul>
-            <TaskForm fetchTasks={fetchTasks} />
         </div>
     );
 };
