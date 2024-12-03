@@ -46,7 +46,6 @@ const TaskList = () => {
     return (
         <div>
             <h2>Task List</h2>
-            <TaskForm fetchTasks={fetchTasks} />
             <ul>
                 {tasks.map((task) => (
                     <li key={task._id}>
@@ -59,6 +58,7 @@ const TaskList = () => {
                     </li>
                 ))}
             </ul>
+            <TaskForm fetchTasks={fetchTasks} />
         </div>
     );
 };
